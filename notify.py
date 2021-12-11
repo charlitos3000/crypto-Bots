@@ -1,3 +1,6 @@
+"""
+Codigo que monitorea cuentas de twiter esperando que mencionen palabras clave en tweets para asi notificar por telegram(su uso es para el analisis fundamental)
+"""
 import json
 import time
 import tweepy
