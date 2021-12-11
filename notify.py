@@ -4,13 +4,14 @@ import tweepy
 import telebot
 
 #llaves y tokens
-apiKey = "3UoFmZMkoPM2niLdqSNOx8bHZ"
-apiSecretKey = "FGSlv56Glq94bIGFkYDjGNdlizuTN59zjGTunTwehF33OUpUyG"
-bearerToken = "AAAAAAAAAAAAAAAAAAAAAFidQAEAAAAAWj3ioQTt42GVEalaVNeMKkx8bAQ%3DBv0dnwtbtFnWpTqTBZLu0s0TtYL7pSrw6j62uPKTIhD5ut5IwX"
-accessToken = "1387861281542221828-Gid1mKq5U27LirrxkznBsZQgaqMxSx"
-accessSecretToken = "lZtQQUKO6A1bNF1jp2v2GPWT3mKnN8dpiPMFsRdFWDqTE"
+apiKey = ""
+apiSecretKey = ""
+bearerToken = ""
+accessToken = ""
+accessSecretToken = ""
+#En este caso solo se monitoreara una cuenta
 listaAmigos = "1387861281542221828"
-TOKEN = '1766147741:AAFBhUjT00uTFcjeiP6osJ2CglBWyO5d0uo'
+TOKEN = ''
 #listaAmigos = ["1387861281542221828"]
 
 
@@ -42,9 +43,12 @@ class TweetsListener(tweepy.StreamListener):
     def on_status(self,status):
         print(status.text)
         tb.send_message("1497317387", status.text)
+        #Palabras clave a buscar
         if "listed" in status.text or "list" in status.text or "newlistings" in status.text or "a" in status.text:
             msg = status.text
+            #para evitar los retweets
             if "R" != msg[0] and "T" != msg[1]:
+                #Para evitar las menciones
                 if "@" != msg[0]:
                     print(status.text)
 
