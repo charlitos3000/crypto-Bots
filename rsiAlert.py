@@ -1,3 +1,6 @@
+"""
+This code study the price of some crypto coins and the RSI indicator to send an e-mail when a good oportunity to buy is open 
+"""
 import time
 from binance import Client, ThreadedWebsocketManager, ThreadedDepthCacheManager
 import talib
@@ -28,8 +31,8 @@ startTime = time.time()
 while True:
     """
     # Cliente binance
-    client = Client("uMAkXjX0IgpNcfYfJF9Ne75YP1gxibIYxDT0Hx8R2t0XJniEZGhPS6gNdh7pmE4j",
-                    "FtBrBhWBE4uqdyQsdZq4LqwhaY9I8GV4s30cuEUI4WN1yeWTszUC8zdZ2YStIu9f")
+    client = Client("",
+                    "")
     client.ping()
     key = client.stream_get_listen_key()
     """
@@ -77,15 +80,14 @@ while True:
                 print(datetime.datetime.now())
                 server = smtplib.SMTP('smtp.gmail.com', 587)
                 server.starttls()
-                server.login('botcarlos3000@gmail.com', 'Solracfree1')
+                server.login('correoAqui', 'contraseñaAqui')
                 #mensaje = "Alerta:"+str(monedas[index])+"\n"+str(datetime.datetime.now())
                 msg = MIMEMultipart()
                 msg['Subject'] = 'Alerta ' + monedas[index] + "!"
                 body = str(datetime.datetime.now())
                 msg.attach(MIMEText(body, 'plain'))
                 mensaje = msg.as_string()
-                server.sendmail('botcarlos3000@gmail.com', 'carloscriptomonedas1@gmail.com', mensaje)
-                #server.sendmail('botcarlos3000@gmail.com', 'lsp66676@gmail.com', mensaje)
+                server.sendmail('correoAqui', 'correoDestino', mensaje)
                 server.quit()
                 banderas[index] = True
         elif rsi[len(rsi)-1] > 32 and rsi[len(rsi)-2] <= 32:
@@ -97,9 +99,7 @@ while True:
         # del client
         #para evitar el error peer
         time.sleep(0.01)
-        client = Client("uMAkXjX0IgpNcfYfJF9Ne75YP1gxibIYxDT0Hx8R2t0XJniEZGhPS6gNdh7pmE4j",
-                            "FtBrBhWBE4uqdyQsdZq4LqwhaY9I8GV4s30cuEUI4WN1yeWTszUC8zdZ2YStIu9f"
-                        , {"timeout": 10})
+        client = Client("","", {"timeout": 10})
         key = client.stream_get_listen_key()
     except:
         print("exception all ")
@@ -108,7 +108,5 @@ while True:
         # del client
         #para evitar el error peer
         time.sleep(0.01)
-        client = Client("uMAkXjX0IgpNcfYfJF9Ne75YP1gxibIYxDT0Hx8R2t0XJniEZGhPS6gNdh7pmE4j",
-                            "FtBrBhWBE4uqdyQsdZq4LqwhaY9I8GV4s30cuEUI4WN1yeWTszUC8zdZ2YStIu9f"
-                        , {"timeout": 10})
+        client = Client("","", {"timeout": 10})
         key = client.stream_get_listen_key()
