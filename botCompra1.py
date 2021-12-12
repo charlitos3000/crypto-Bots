@@ -1,3 +1,6 @@
+"""
+Programa que teniendo en cuenta el MACD y el precio de una moneda realiza transacciones en binance, lo documenta en mongoDB y notifica por correo
+"""
 from binance.client import Client
 import talib as ta
 import matplotlib.pyplot as plt
